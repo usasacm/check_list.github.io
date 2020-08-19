@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Title</title>
+    <script src="/static/js/db.js?u={{token[1]}}"></script>
+    <script src="/static/js/jquery.js?u={{token[0]}}"></script>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+<div class="container">
+<div class="container_title"><span>Справочник МКБ</span></div>
+<div id="tt" class="container_child">
+    <input type="text" id="txtField" class="container_child_input_search">
+</div>
+<div id = "searchRes" class="container_child_mkb">
+</div>
+</div>
+    <script>
+      $(document).ready(function(){
+       var searchField = document.getElementById('txtField');
+       searchField.addEventListener('keyup',tstt);
+
+      function tstt(e){
+         var txtValue = e.target.value;
+         if (e.key != "Enter" && txtValue.length >= 1){
+         $('#searchRes').empty();
+          var tx = db.transaction(['mkbT'],"readwrite");
+          var store = tx.objectStore('mkbT');
+          var cursor = store.openCursor();
+          cursor.onsuccess = function(e) {
+                var res = e.target.result;
+                if(res) {
+                    if(res.value.kod.toUpperCase().indexOf(txtValue.toUpperCase()) !== -1 ||
+                       res.value.title.toUpperCase().indexOf(txtValue.toUpperCase()) !== -1){
+                            $('#searchRes').append ('<div  class = "container_child_mkb_item">'+
+                                                       '<span class="container_child_mkb_item_kod">'+res.value.kod+'</span>'+
+                                                       '<span class="container_child_mkb_item_title">'+res.value.title+'</span>'+
+                                                    '</div>'
+                                                    );
+                        }
+                 res.continue();
+                }
+            }
+         }else{
+             $('#searchRes').empty();
+         }
+      };
+
+
+      });
+  </script>
+
+
+
+
+</body>
+</html>

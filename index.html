@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="/static/js/db.js?u={{token[1]}}"></script>
+    <script src="/static/js/jquery.js?u={{token[0]}}"></script>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+<div id="main_container" class="container">
+    <div id="menu_title" class="container_title"><span>Меню</span></div>
+    <div id="container_content" class="container_child_button">
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+          var tx = db.transaction(['menuT'],"readwrite");
+          var store = tx.objectStore('menuT');
+          var cursor = store.openCursor();
+          cursor.onsuccess = function(e) {
+                var res = e.target.result;
+                if(res) {
+                    $('#container_content').append(
+                        '<button type="button" onclick="window.location.href =\''+res.value.file_name+'\';">'+res.value.title+'</button>'
+                    );
+                 res.continue();
+                }
+            }
+    });
+</script>
+</body>
+</html>

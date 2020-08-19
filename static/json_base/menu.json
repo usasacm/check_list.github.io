@@ -1,0 +1,12 @@
+[
+    {
+      "id": "_mkb",
+      "title": "МКБ",
+      "file_name": "/mkb_list"
+    },
+    {
+      "id": "_check_list",
+      "title": "Чек-листы",
+      "file_name": "/checkList"
+    }
+  ]
