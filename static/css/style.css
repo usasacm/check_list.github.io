@@ -22,9 +22,8 @@ body{
 }
 .container_child_button{
    display: flex;
-   justify-content:center;
-   align-items:center;
    flex-direction:column;
+   padding-top: 20px;
    width: 100%;
    margin: 10px;
    height: 80vh;
@@ -34,6 +33,7 @@ body{
     width: 100%;
     height: 100%;
     font-size: 5vw;
+    margin: 2px;
 }
 
 .container_child_input_search{
