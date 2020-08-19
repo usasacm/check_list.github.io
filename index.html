@@ -26,7 +26,7 @@
                 var res = e.target.result;
                 if(res) {
                     $('#container_content').append(
-                        '<button type="button" onclick="window.location.href =\''+res.value.file_name+'\';">'+res.value.title+'</button>'
+                        '<button class="container_child_button_item" type="button" onclick="window.location.href =\''+res.value.file_name+'\';">'+res.value.title+'</button>'
                     );
                  res.continue();
                 }
