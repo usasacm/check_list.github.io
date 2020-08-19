@@ -2,11 +2,11 @@
     {
       "id": "_mkb",
       "title": "МКБ",
-      "file_name": "/mkb_list"
+      "file_name": "mkb.html"
     },
     {
       "id": "_check_list",
       "title": "Чек-листы",
-      "file_name": "/checkList"
+      "file_name": "checkList.html"
     }
   ]
