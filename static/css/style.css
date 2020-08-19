@@ -44,6 +44,7 @@ body{
     font-size: 5vw;
     font-weight: 600;
     margin-right: 2px;
+    padding-top: 10px;
 }
 .container_child{
    display: flex;
