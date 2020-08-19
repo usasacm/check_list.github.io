@@ -16,7 +16,7 @@ if(!window.indexedDB){
        var _db = e.target.result;
        var txn = e.target.transaction;
 
-        var menu_data = getData('/check_list.github.io/static/json_base/menu_json.json')
+        var menu_data = getData('/check_list.github.io/static/json_base/menu.json')
         var mkb_data = getData('/check_list.github.io/static/json_base/mkb.json');
        if (e.oldVersion == 0){
             createTable(_db, "menuT", menu_data, "id", false, false);
