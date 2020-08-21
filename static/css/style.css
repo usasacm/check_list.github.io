@@ -1,4 +1,4 @@
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {
+/*body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {
 	padding: 0;
 	margin: 0;
 	}
@@ -27,39 +27,49 @@ q:before,q:after {
 	content:'';
 	}
 abbr,acronym { border: 0;
-	}
-
+	}*/
+* {
+    box-sizing: border-box;
+    font-family: sans-serif;
+    margin: 0;
+}
+html{
+height: 100%;
+}
 body{
   background: #5EB2F2;
 }
 .container{
    display: flex;
+   flex-direction: column;
    justify-content:center;
    align-items:center;
    flex-wrap: wrap;
+   height: 100vh;
 }
 .container_title{
+flex-shrink: 0;
     color: white;
     font-size: 5vw;
     font-weight: 600;
-    margin-right: 2px;
     padding-top: 10px;
 }
 .container_child{
    display: flex;
    justify-content:center;
    align-items:center;
-   width: 100%;
+ /*  width: 100%;*/
    margin: 10px;
+
 }
 .container_child_button{
    display: flex;
    flex-direction:column;
    padding-top: 20px;
    align-items: center;
-   width: 100%;
+   width: 90%;
    margin: 10px;
-   height: 80vh;
+   flex: 1 0 auto;
 }
 
 .container_child_button_item{
@@ -73,7 +83,7 @@ body{
 }
 
 .container_child_input_search{
-   width: 85%;
+   width: 100%;
    text-align: center;
    border-radius: 10px;
    border: 1px solid #2699F2;
@@ -90,8 +100,9 @@ body{
    flex-direction:column;
    align-items:center;
    width: 100%;
-   height: 85vh;
+  /* height: 85vh;*/
    overflow-y: auto;
+   flex: 1 1 !important;
 }
 .container_child_mkb_item{
    width: 85%;
@@ -111,4 +122,18 @@ body{
     font-size: larger;
     font-weight: 500;
     margin-left: 2px;
+}
+
+.container_footer_content{
+   background:#658BF3;
+   width: 100%;
+   text-align: center;
+   flex-shrink: 0;
+   height: 40px;
+}
+
+.container_footer_content_text{
+     color: #F3F9FE;
+     padding: 10px 0px;
+     display: block;
 }
