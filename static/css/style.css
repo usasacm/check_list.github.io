@@ -29,7 +29,6 @@ q:before,q:after {
 abbr,acronym { border: 0;
 	}
 
-
 body{
   background: #2196f36b;
 }
@@ -63,8 +62,8 @@ body{
 }
 
 .container_child_button_item{
-    width: 100%;
-    height: 100%;
+    width: 85%;
+    height: 50%;
     font-size: 5vw;
     margin: 2px;
 }
