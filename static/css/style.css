@@ -76,9 +76,15 @@ body{
    width: 85%;
    text-align: center;
    border-radius: 10px;
+   border: 1px solid #2699F2;
    font-size: 20px;
    color: #0288F0;
 }
+
+.container_child_input_search:focus{
+  border: 2px solid #2699F2;
+}
+
 .container_child_mkb{
    display: flex;
    flex-direction:column;
