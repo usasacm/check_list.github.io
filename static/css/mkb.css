@@ -62,16 +62,3 @@
     margin-left: 2px;
 }
 
-.container_footer_content{
-   background:#658BF3;
-   width: 100%;
-   text-align: center;
-   flex-shrink: 0;
-   height: 40px;
-}
-
-.container_footer_content_text{
-     color: #F3F9FE;
-     padding: 10px 0px;
-     display: block;
-}

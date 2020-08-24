@@ -40,8 +40,8 @@ body{
   background: #0067A8;
   height: 100%;
  /* background-image: url('/check_list.github.io/static/css/images/background_medical3.jpg');
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
+  background-position: center;
+  background-repeat: no-repeat;
   background-size: cover;*/
 }
 
@@ -53,4 +53,18 @@ body{
     padding-top: 10px;
     word-wrap: break-word;
     text-align: center;
+}
+
+.container_footer_content{
+   background:#0288F0;
+   width: 100%;
+   text-align: center;
+   flex-shrink: 0;
+   height: 40px;
+}
+
+.container_footer_content_text{
+     color: #F3F9FE;
+     padding: 10px 0px;
+     display: block;
 }
