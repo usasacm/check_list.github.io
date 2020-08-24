@@ -15,9 +15,6 @@
 <div id="main_container" class="container">
     <div id="menu_title" class="container_title"><span>Меню</span></div>
     <div id="container_content" class="container_child_button">
-        <div id="container_content_image" class="container_child_item">
-          <img src="/check_list.github.io/static/css/images/check_lists_icon.png"><span>Чек-листы</span>
-        </div>
     </div>
     <footer id="footer_content" class="container_footer_content"><span class="container_footer_content_text">ГБУЗ НСО ССМП</span></footer>
 </div>
@@ -31,7 +28,10 @@
                 var res = e.target.result;
                 if(res) {
                     $('#container_content').append(
-                        '<button class="container_child_button_item" type="button" onclick="window.location.href =\''+res.value.file_name+'\';">'+res.value.title+'</button>'
+                        '<div id="container_content_image" class="container_child_item" onclick="window.location.href =\''+res.value.file_name+'\';">'+
+                        '<img src="'+res.value.icon_path+'"><span>'+res.value.title+'</span>'+
+                        '</div>'
+                       // '<button class="container_child_button_item" type="button" onclick="window.location.href =\''+res.value.file_name+'\';">'+res.value.title+'</button>'
                     );
                  res.continue();
                 }

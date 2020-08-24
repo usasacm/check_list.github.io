@@ -4,7 +4,7 @@ var mkb_data = getData('/mkb');*/
 if(!window.indexedDB){
   console.log("not support");
 }else{
-   var request = window.indexedDB.open("locahost_db", 2);
+   var request = window.indexedDB.open("locahost_db", 4);
    var db
 
    request.onsuccess = function(e) {
