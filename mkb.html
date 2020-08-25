@@ -16,6 +16,7 @@
 <div id="tt" class="container_child">
     <img src="/check_list.github.io/static/css/images/search.png" class="container_child_search">
     <input type="text" id="txtField" class="container_child_input_search">
+    <img id="clearFilterText" class="container_child_clear" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABmJLR0QA/wD/AP+gvaeTAAADj0lEQVRYhe2YTUwTQRTHX3e7dHelwCoiEExJvGg5eDARj5oQjQVajEKEqBjjiWAMUtBjj6ZAgjFwgfiZQFITQ23AKCR6MbF6MB4ofpwIqAQ0BarTbctuPdTV6i7dj1kSo7zjvMnMb+a/8+a/A7AZ/3hYciUbAwGSn3PcEcT01ETXgZsbAeDqCbdYAY6tfkPNT32H1v7ME7ngEnOO0XKO9dAUOeDqe3HWbLja3nCrjSKGyrcxtYUF7GhjIEBqAmwMBMjEfOVIGcfUdrj3bLncUMUwVsvA0b7n58yCc/WEW/JIYrDL7WQveZxMxdYtruRc5f2DvifW7H4yiX/CFdF1HW4na7Nm1rC4zIM/OI3QmnDhYeeBG7hwNisx1OVxsmVbGQAASAkiXAu9QfNf0NRK7NtxSW7ZDvJzjrtlRUxdp+cXHABASRENXreTpUnyem1vuNUonCRrd8MvOAAAiiTgYv1utpRjaux29o7ULgMUBAgtrvCwtJqQDV7KMXCloYqlKWLQiNzZspZyjCwfjSXhc4wHQUxPSm2Kp9jlDzfbKGLY2+BkyxUGMiK3kqxKY8aTQnt2xVi3zJgJaRQuJ6BZkDhwqoC4kLhwmgCNQpoBpxlQL6RFtPBmwOkCBMjUsDwrMdjtUS4TC9E4+IMRBACg1ie5JraNe6tvq82pC1ArJECmZirleoKROC+k2yY699/SMp9uQAB1uZVCj6zYgHohjcJhAWqFxIEDyOEHNYUls0BLWr1rmjC2GcYlVqlz2YFj1YwdEh1wuJB/fZmR/QPgwvmDEfTs7VJqr4Oj8hnqt3w+Q8FeB0eF330+vKvm/If3j4dfq82p+ZComc3FZR56H0RQIiW0J5Lief9YBH38sZvZodf0ajMLBi5+s/ykut3CcCVmQOY2rCZYJlzI9S2/SX4OF1L5p8lEOFxIGeBGwOFAysoMSUBdSSENxYU22QAL0ThcHZtGfEpsM3LxT3RXjyYFsa03GEELCiWIs+dBsZ0GK1hqpDYZ4L7Y/lML0XioLxhBiTXxt9VJdU6LE14vxr3Vt5XqZEoQoT80gz5F0WQshs5I7YrfoM+XJl7ZX46UcnR9h9vJrnxNYlkmpciWe3uBDfpDM2j+C5pcjaET2c9w655i6fmtjGNdS6s8oef+1BrS1bmjgIZPy2gir2L25L2mJiG7j5YHzLtiGh7hyKoGSVjgCL1z9vSfcJvxX8R3juIm9bo378IAAAAASUVORK5CYII="/>
 </div>
 <div id = "searchRes" class="container_child_mkb"></div>
 <footer id="footer_content" class="container_footer_content"><span class="container_footer_content_text">ГБУЗ НСО ССМП</span></footer>
@@ -24,6 +25,14 @@
       $(document).ready(function(){
        var searchField = document.getElementById('txtField');
        searchField.addEventListener('keyup',tstt);
+
+       var clearFilter = document.getElementById('clearFilterText');
+       clearFilterText.addEventListener('click',onClearFilter);
+
+       function onClearFilter(e){
+          searchField.value='';
+          $('#searchRes').empty();
+       };
 
       function tstt(e){
          var txtValue = e.target.value;
