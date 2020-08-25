@@ -20,6 +20,7 @@
     display:flex;
     align-items:center;
     margin:10px 15px;
+    cursor: pointer;
 }
 
 .check_lists_item_img{
@@ -33,6 +34,14 @@
   color: white;
   font-size: 3vh;
   font-weight: 800;
+}
+
+.check_lists_item:hover svg{
+   transform: scale(0.8);
+}
+
+.check_lists_item:hover span{
+   font-size: 2vh;
 }
 
 @media only screen and (max-width: 600px) {
