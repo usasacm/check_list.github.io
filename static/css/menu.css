@@ -17,12 +17,17 @@
    justify-content: center;
 }
 
+.container_child_button > div:last-of-type{
+     margin-bottom: 0px ;
+}
+
 .container_child_item{
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 3.5rem ;
     cursor: pointer;
 }
+
 .container_child_item:hover{
 
 }
