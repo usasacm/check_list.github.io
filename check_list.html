@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Title</title>
+    <script>document.write("<script type='text/javascript' src='/check_list.github.io/static/js/db.js?u=" + Date.now() + "'><\/script>");</script>
+    <script>document.write("<script type='text/javascript' src='/check_list.github.io/static/js/jquery.js?u=" + Date.now() + "'><\/script>");</script>
+    <script>document.write("<link rel='stylesheet' href='/check_list.github.io/static/css/style.css?u=" + Date.now() + "'>");</script>
+    <script>document.write("<link rel='stylesheet' href='/check_list.github.io/static/css/check_list.css?u=" + Date.now() + "'>");</script>
+    <title>Список чек-листов</title>
+</head>
+<body>
+
+<div class="container">
+    <div  class="container_title"><span>Чек-листы</span></div>
+    <div id="check_list_box" class="check_lists">
+      <!--  <div class="check_lists_item">
+            <svg class="check_lists_item_img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
+            <span class="check_lists_item_text">Check-list 1</span>
+        </div>
+        <div class="check_lists_item">
+            <svg class="check_lists_item_img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
+            <span class="check_lists_item_text">Check-list 2</span>
+        </div>-->
+    </div>
+    <footer id="footer_content" class="container_footer_content"><span class="container_footer_content_text">ГБУЗ НСО ССМП</span></footer>
+</div>
+<script>
+     $(document).ready(function(){
+          var tx = db.transaction(['check_lists'],"readwrite");
+          var store = tx.objectStore('check_lists');
+          var cursor = store.openCursor();
+          cursor.onsuccess = function(e) {
+                var res = e.target.result;
+                if(res) {
+                    $('#check_list_box').append(
+                        '<div class="check_lists_item" data-param='+res.value.id+'>'+
+                            '<svg class="check_lists_item_img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>'+
+                            '<span class="check_lists_item_text">'+res.value.title+'</span>'+
+                        '</div>'
+                    );
+                   res.continue();
+                }
+          }
+     });
+</script>
+</body>
+</html>
