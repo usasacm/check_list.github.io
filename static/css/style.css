@@ -48,7 +48,7 @@ body{
 .container_title{
     flex-shrink: 0;
     color: #F4F6FE;
-    font-size: 7vh;
+    font-size: 7vw;
     font-weight: 600;
     padding-top: 10px;
     word-wrap: break-word;

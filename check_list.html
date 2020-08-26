@@ -8,6 +8,7 @@
     <script>document.write("<script type='text/javascript' src='/check_list.github.io/static/js/jquery.js?u=" + Date.now() + "'><\/script>");</script>
     <script>document.write("<link rel='stylesheet' href='/check_list.github.io/static/css/style.css?u=" + Date.now() + "'>");</script>
     <script>document.write("<link rel='stylesheet' href='/check_list.github.io/static/css/check_list.css?u=" + Date.now() + "'>");</script>
+    <script>document.write("<link rel='stylesheet' href='/check_list.github.io/static/css/popup.css?u=" + Date.now() + "'>");</script>
     <title>Список чек-листов</title>
 </head>
 <body>
@@ -15,20 +16,61 @@
 <div class="container">
     <div  class="container_title"><span>Чек-листы</span></div>
     <div id="check_list_box" class="check_lists">
-      <!--  <div class="check_lists_item">
-            <svg class="check_lists_item_img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
-            <span class="check_lists_item_text">Check-list 1</span>
-        </div>
-        <div class="check_lists_item">
-            <svg class="check_lists_item_img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
-            <span class="check_lists_item_text">Check-list 2</span>
-        </div>-->
     </div>
     <footer id="footer_content" class="container_footer_content"><span class="container_footer_content_text">ГБУЗ НСО ССМП</span></footer>
 </div>
+<div id="pop-up">
+  <div id="pop-box">
+    <div id="pop-close" onclick="pop.close()">x</div>
+      <div id="pop-up-items" class="pop_up_items"></div>
+  </div>
+</div>
 <script>
+    var pop;
     function createItems(e){
         console.log(e.getAttribute('data-param'));
+          var parent_id_value =  e.getAttribute('data-param');
+          var tx = db.transaction(['check_list_items'],"readwrite");
+          var store = tx.objectStore('check_list_items');
+          var cursor = store.openCursor();
+          var list_items=[];
+          cursor.onsuccess = function(e) {
+                var res = e.target.result;
+                if(res) {
+                      if (res.value.parent_id == parent_id_value){
+                          list_items.push(res.value.title);
+                      }
+                  res.continue();
+                }else{
+
+                    pop = {
+                                  open : function (items) {
+                                     $('#pop-up-items').empty();
+                                    $('#pop-up-items').append(items);
+                                    document.getElementById("pop-up").classList.add("open");
+
+                                  },
+
+                                  close : function () {
+                                    document.getElementById("pop-up").classList.remove("open");
+                                  }
+                              };
+
+
+                   var listQuestion = '';
+                   list_items.forEach(function(item, idx){
+                   console.log(idx);
+                       listQuestion+='<div class="item_question">'+
+                                         '<input class="item_question_checkbox" type="checkbox" value="" id="'+(idx+1)+'">' +
+                                         '<label class="item_question_label" for="'+(idx+1)+'">'+item+'</label>'+
+                                     '</div>';
+                   });
+                   pop.open(listQuestion);
+                   console.log(listQuestion);
+                }
+          };
+
+
     };
 
 </script>
@@ -36,14 +78,11 @@
      $(document).ready(function(){
           var tx = db.transaction(['check_lists'],"readwrite");
           var store = tx.objectStore('check_lists');
-          var cursor = store.openCursor();
+          var cursor = store.openCursor(null, 'prev');
 
 
 
           cursor.onsuccess = function(e) {
-
-
-
                 var res = e.target.result;
                 if(res) {
                     $('#check_list_box').append(
