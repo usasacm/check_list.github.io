@@ -27,13 +27,15 @@
   flex-direction:column;
   align-items:flex-start;
   justify-content:flex-start;
-  height: 95%;
+  height: 100%;
   overflow-y: auto;
   border: 1px solid #2699F2;
   padding: 2px;
+  width: 98%;
 }
 
 .item_question_checkbox{
+   display: inline-block;
    margin-right: 5px;
 }
 .item_question_label{
@@ -43,8 +45,13 @@
 
 .item_question{
   border-radius: 5px;
-  border: 1px solid #ffff;
+  border: 1px solid #2699F2;
   margin: 3px 3px 3px 3px;
+  padding: 2px;
+}
+
+.item_question:first-of-type{
+  margin: 20px 3px 3px 3px;
 }
 
 #pop-close {
@@ -53,6 +60,7 @@
   right: 0;
   background: #a83232;
   color: #fff;
-  padding: 3px;
+  padding: 7px;
   cursor: pointer;
+  z-index: 1;
 }
