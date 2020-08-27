@@ -9,6 +9,7 @@
     <script>document.write("<link rel='stylesheet' href='/check_list.github.io/static/css/style.css?u=" + Date.now() + "'>");</script>
     <script>document.write("<link rel='stylesheet' href='/check_list.github.io/static/css/check_list.css?u=" + Date.now() + "'>");</script>
     <script>document.write("<link rel='stylesheet' href='/check_list.github.io/static/css/popup.css?u=" + Date.now() + "'>");</script>
+    <script>document.write("<link rel='stylesheet' href='/check_list.github.io/static/css/popup_dynamic.css?u=" + Date.now() + "'>");</script>
     <title>Список чек-листов</title>
 </head>
 <body>
@@ -22,14 +23,26 @@
 <div id="pop-up">
   <div id="pop-box">
     <div id="pop-close" onclick="pop.close()">x</div>
-      <div id="pop-up-items" class="pop_up_items"></div>
+    <div id="pop-up-items" class="pop_up_items"></div>
   </div>
 </div>
+
+<div id="pop-up-dynamic">
+  <div id="pop-box-dynamic">
+    <div id="pop-close-dynamic" onclick="popup_dynamic.close()">x</div>
+    <div id="pop-up-items-dynamic" class="pop_up_items_dynamic"></div>
+  </div>
+</div>
+
+
 <script>
     var pop;
+    var popup_dynamic;
+    var dialog_;
     function createItems(e){
-        console.log(e.getAttribute('data-param'));
+
           var parent_id_value =  e.getAttribute('data-param');
+          var isDialog = e.getAttribute('data-dialog')=="true"?true:false;
           var tx = db.transaction(['check_list_items'],"readwrite");
           var store = tx.objectStore('check_list_items');
           var cursor = store.openCursor();
@@ -38,35 +51,108 @@
                 var res = e.target.result;
                 if(res) {
                       if (res.value.parent_id == parent_id_value){
-                          list_items.push(res.value.title);
+                          if(isDialog){
+                              list_items.push(res.value.value);
+                          }else{
+                              list_items.push(res.value.title);
+                          }
                       }
                   res.continue();
                 }else{
+                  pop = {
+                         open : function (items) {
+                           $('#pop-up-items').empty();
+                           $('#pop-up-items').append(items);
+                           document.getElementById("pop-up").classList.add("open");
+                          },
+                         close : function () {
+                           document.getElementById("pop-up").classList.remove("open");
+                         }
+                  };
 
-                    pop = {
-                                  open : function (items) {
-                                     $('#pop-up-items').empty();
-                                    $('#pop-up-items').append(items);
-                                    document.getElementById("pop-up").classList.add("open");
+                  popup_dynamic = {
+                         open : function (items) {
+                           $('#pop-up-items-dynamic').empty();
+                           $('#pop-up-items-dynamic').append(items);
+                           document.getElementById("pop-up-dynamic").classList.add("open");
+                          },
+                         close : function () {
+                           document.getElementById("pop-up-dynamic").classList.remove("open");
+                         }
+                  };
 
-                                  },
+                   if(!isDialog){
+                       var listQuestion = '';
+                       list_items.forEach(function(item, idx){
+                       console.log(idx);
+                           listQuestion+='<div class="item_question">'+
+                                             '<input class="item_question_checkbox" type="checkbox" value="" id="'+(idx+1)+'">' +
+                                             '<label class="item_question_label" for="'+(idx+1)+'">'+item+'</label>'+
+                                         '</div>';
+                       });
+                       pop.open(listQuestion);
+                       console.log(listQuestion);
+                   }else{
 
-                                  close : function () {
-                                    document.getElementById("pop-up").classList.remove("open");
-                                  }
-                              };
+                      dialog_ = {
+                          count: 0,
+                          me: undefined,
+                          listDialogQuestion:'',
+                          questionObject: undefined,
+                          currentQuestion: undefined,
+                          initObject: function(){
+                             me = this;
+                             me.questionObject = list_items[0];
+                             me.currentQuestion = me.questionObject.questions[me.questionObject.firstQuestion];
+                             me.openDialog();
+                             console.log(me);
+                          },
+                          next: function(elem){
+                              $('#pop-up-items-dynamic').empty();
+                              me.sum(elem);
+                              let nextQuestionNumber = me.currentQuestion.next;
+                               if(nextQuestionNumber.includes("correct_answer"))
+                                 return me.result(me.questionObject.questions[nextQuestionNumber]);
+                              me.listDialogQuestion = '';
+                              me.currentQuestion = me.questionObject.questions[nextQuestionNumber];
+                              me.listDialogQuestion+='<div class="dynamic_question_text">'+me.currentQuestion.title+'</div>';
+                              me.currentQuestion["answers"].forEach(function(item, idx){
+                                  me.listDialogQuestion+='<button class="dynamic_question_answer" data-value='+item.value+' type="button" onclick="me.next(this)">'+item.title+'</button>';
+                              });
+                              $('#pop-up-items-dynamic').append(me.listDialogQuestion);
+                          },
+                          result: function(correct_ans){
+                              if(me.count == correct_ans.value){
+                                  $('#pop-up-items-dynamic').append('<div class="dynamic_question_text">'+me.questionObject.questions[correct_ans.next].equal.title+'</div>');
+                                  if(me.questionObject.questions[correct_ans.next].equal.next != "end"){
+                                        me.count = 0;
+                                        me.currentQuestion = me.questionObject.questions[correct_ans.next].equal;
+                                        $('#pop-up-items-dynamic').append('<button class="dynamic_question_answer" type="button" onclick="me.next(this)">Дальше</button>');
+                                   }
+                              }else{
+                                  $('#pop-up-items-dynamic').append('<div class="dynamic_question_text">'+me.questionObject.questions[correct_ans.next].not_equal.title+'</div>');
+                                   if(me.questionObject.questions[correct_ans.next].not_equal.next != "end"){
+                                        me.count = 0;
+                                        me.currentQuestion = me.questionObject.questions[correct_ans.next].not_equal;
+                                        $('#pop-up-items-dynamic').append('<button class="dynamic_question_answer" type="button" onclick="me.next(this)">Дальше</button>');
+                                   }
+                              }
+                          },
+                          openDialog: function(){
+                              me.listDialogQuestion+='<div class="dynamic_question_text">'+me.currentQuestion.title+'</div>';
+                              me.currentQuestion["answers"].forEach(function(item, idx){
+                                  me.listDialogQuestion+='<button class="dynamic_question_answer" data-value='+item.value+' type="button" onclick="me.next(this)">'+item.title+'</button>';
+                              });
+                              popup_dynamic.open(me.listDialogQuestion);
+                          },
+                          sum: function(v){
+                            let num = parseInt(v.getAttribute('data-value'));
+                            me.count+=(isNaN(num) ? 0 : num);
+                          }
+                      };
 
-
-                   var listQuestion = '';
-                   list_items.forEach(function(item, idx){
-                   console.log(idx);
-                       listQuestion+='<div class="item_question">'+
-                                         '<input class="item_question_checkbox" type="checkbox" value="" id="'+(idx+1)+'">' +
-                                         '<label class="item_question_label" for="'+(idx+1)+'">'+item+'</label>'+
-                                     '</div>';
-                   });
-                   pop.open(listQuestion);
-                   console.log(listQuestion);
+                      dialog_.initObject();
+                   }
                 }
           };
 
@@ -84,7 +170,7 @@
                 var res = e.target.result;
                 if(res) {
                     $('#check_list_box').append(
-                        '<div class="check_lists_item" data-param='+res.value.id+' onclick="createItems(this)">'+
+                        '<div class="check_lists_item" data-dialog='+res.value.dialog+' data-param='+res.value.id+' onclick="createItems(this)">'+
                             '<img class="check_lists_item_img" src="/check_list.github.io/static/css/images/list.png"></img>'+
                             '<span class="check_lists_item_text">'+res.value.title+'</span>'+
                         '</div>'
@@ -92,14 +178,6 @@
                    res.continue();
                 }
           }
-
-       //
-
-      //  listItemClick.addEventListener('click',openListItems);
-
-
-
-
 
      });
 </script>

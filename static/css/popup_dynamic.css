@@ -1,5 +1,5 @@
 
-#pop-up {
+#pop-up-dynamic {
   position: fixed;
   top: 1vh;
   left: 0;
@@ -9,11 +9,11 @@
   background: rgba(0, 0, 0, 0.5);
   display: none;
 }
-#pop-up.open {
+#pop-up-dynamic.open {
   display: block;
 }
 
-#pop-box {
+#pop-box-dynamic {
   position: relative;
   background: #0067A8;
   margin: 0 auto;
@@ -22,10 +22,10 @@
   height: 95%;
 }
 
-.pop_up_items{
+.pop_up_items_dynamic{
   display: flex;
   flex-direction:column;
-  align-items:flex-start;
+  align-items:center;
   justify-content:flex-start;
   height: 100%;
   overflow-y: auto;
@@ -34,6 +34,19 @@
   width: 98%;
 }
 
+.dynamic_question_text{
+  font-size: 3vh;
+  color: white;
+  flex: 1 1 !important;
+}
+
+.dynamic_question_answer{
+    width: 100%;
+    height: 20%;
+    flex-shrink: 0;
+}
+
+/*
 .item_question_checkbox{
    display: inline-block;
    margin-right: 5px;
@@ -55,7 +68,11 @@
   margin: 20px 3px 3px 3px;
 }
 
-#pop-close {
+.dynamic_question_text{
+    font-size: 1vh;
+    color: white;
+}*/
+#pop-close-dynamic {
   position: absolute;
   top: 0;
   right: 0;

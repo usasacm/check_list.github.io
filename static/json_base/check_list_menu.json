@@ -2,36 +2,49 @@
   {
     "id": "item-tab",
     "title": "<FONT COLOR=\"#47CC2B\"> J20.9</FONT>  КОРОНАВИРУС - ОСТРЫЙ БРОНХИТ",
-    "table": "check_list_items"
+    "table": "check_list_items",
+    "dialog": false
   },
   {
     "id": "item-tcr",
     "title": "СЕРДЕЧНО-ЛЕГОЧНАЯ РЕАНИМАЦИЯ",
-    "table": "check_list_items"
+    "table": "check_list_items",
+    "dialog": false
   },
   {
      "id": "item-covid",
     "title": "КОРОНАВИРУС",
-    "table": "check_list_items"
+    "table": "check_list_items",
+    "dialog": false
   },
   {
     "id": "item-tdba",
     "title": "СМЕРТЬ \"ДО ПРИБЫТИЯ\"",
-    "table": "check_list_items"
+    "table": "check_list_items",
+    "dialog": false
   },
   {
     "id": "item-tdp",
     "title": "СМЕРТЬ \"В ПРИСУТСТВИИ\", \"В АВТОМОБИЛЕ СМП\"",
-    "table": "check_list_items"
+    "table": "check_list_items",
+    "dialog": false
   },
   {
     "id": "item-tp",
     "title": "<FONT COLOR=\"#47CC2B\">J18.9</FONT>  КОРОНАВИРУС - ВИРУСНАЯ ВНЕБОЛЬНИЧНАЯ ПНЕВМОНИЯ",
-    "table": "check_list_items"
+    "table": "check_list_items",
+    "dialog": false
   },
   {
     "id": "item-tri",
     "title": "<FONT COLOR=\"#47CC2B\">J06.9</FONT>  КОРОНАВИРУС - ОРВИ ТЯЖЕЛОЕ ЛЕЧЕНИЕ",
-    "table": "check_list_items"
+    "table": "check_list_items",
+    "dialog": false
+  },
+  {
+    "id": "item-ifh",
+    "title": "ПОКАЗАНИЯ К ГОСПИТАЛИЗАЦИИ COVID",
+    "table": "check_list_items",
+    "dialog": true
   }
 ]

@@ -1,5 +1,6 @@
 /*var menu_data = getData('/menu_json')
 var mkb_data = getData('/mkb');*/
+/*--5--*/
 const dbVersion = 5;
 
 if(!window.indexedDB){
