@@ -46,32 +46,14 @@
     flex-shrink: 0;
 }
 
-/*
-.item_question_checkbox{
-   display: inline-block;
-   margin-right: 5px;
-}
-.item_question_label{
-   font-size: 16px;
-    color: white;
+.popup_sub_question_sub_item_describe{
+   color:#47CC2B;
 }
 
-.item_question{
-  border-radius: 5px;
-  border: 1px solid #2699F2;
-  margin: 3px 3px 3px 3px;
-  padding: 2px;
-  width: 98%;
+.popup_sub_question_sub_item_action{
+   color:white;
 }
 
-.item_question:first-of-type{
-  margin: 20px 3px 3px 3px;
-}
-
-.dynamic_question_text{
-    font-size: 1vh;
-    color: white;
-}*/
 #pop-close-dynamic {
   position: absolute;
   top: 0;

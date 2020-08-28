@@ -55,6 +55,18 @@
   margin: 20px 3px 3px 3px;
 }
 
+.popup_sub_question{
+     margin: 5px;
+}
+
+.popup_sub_question_item{
+
+}
+
+.popup_sub_question_item_header{
+    padding-top:2px;
+}
+
 #pop-close {
   position: absolute;
   top: 0;
