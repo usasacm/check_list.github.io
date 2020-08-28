@@ -46,5 +46,11 @@
     "title": "ПОКАЗАНИЯ К ГОСПИТАЛИЗАЦИИ COVID",
     "table": "check_list_items",
     "dialog": true
+  },
+  {
+    "id": "item-ps",
+    "title": "БОЛЕВОЙ СИНДРОМ ПРИ ЗНО",
+    "table": "check_list_items",
+    "dialog": false
   }
 ]
