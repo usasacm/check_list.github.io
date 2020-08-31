@@ -1,7 +1,7 @@
 /*var menu_data = getData('/menu_json')
 var mkb_data = getData('/mkb');*/
-/*--prod db version 7--*/
-const dbVersion = 8;
+/*--prod db version 9--*/
+const dbVersion = 9;
 
 if(!window.indexedDB){
   console.log("not support");
