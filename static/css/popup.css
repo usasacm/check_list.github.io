@@ -69,7 +69,7 @@
     font-size: 2.1vh;
     color: #7ae114;
     cursor: pointer;
-    display: inline-block;
+    display: block;
     margin-bottom: 2vh;
 }
 
