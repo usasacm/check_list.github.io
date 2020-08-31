@@ -167,6 +167,9 @@
           var cursor = store.openCursor(null, 'prev');
 
           cursor.onsuccess = function(e) {
+               function openMenu(x){
+                  x.classList.toggle("open");
+               };
                 var res = e.target.result;
                 if(res) {
                     $('#check_list_box').append(

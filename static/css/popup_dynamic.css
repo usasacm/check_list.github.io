@@ -52,6 +52,8 @@
 
 .popup_sub_question_sub_item_action{
    color:white;
+   width: 100%;
+   text-align: center;
 }
 
 #pop-close-dynamic {
