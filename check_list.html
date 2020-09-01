@@ -10,16 +10,31 @@
     <script>document.write("<link rel='stylesheet' href='/check_list.github.io/static/css/check_list.css?u=" + Date.now() + "'>");</script>
     <script>document.write("<link rel='stylesheet' href='/check_list.github.io/static/css/popup.css?u=" + Date.now() + "'>");</script>
     <script>document.write("<link rel='stylesheet' href='/check_list.github.io/static/css/popup_dynamic.css?u=" + Date.now() + "'>");</script>
+    <script>document.write("<link rel='stylesheet' href='/check_list.github.io/static/css/popup_menu.css?u=" + Date.now() + "'>");</script>
+    <script>document.write("<script type='text/javascript' src='/check_list.github.io/static/js/menu.js?u=" + Date.now() + "'><\/script>");</script>
     <title>Список чек-листов</title>
+
 </head>
 <body>
 
 <div class="container">
+    <div class="container_menu" onclick="openMenu(this)">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+    </div>
     <div  class="container_title"><span>Чек-листы</span></div>
     <div id="check_list_box" class="check_lists">
     </div>
     <footer id="footer_content" class="container_footer_content"><span class="container_footer_content_text">ГБУЗ НСО ССМП</span></footer>
 </div>
+
+<div id="pop-up-menu">
+  <div id="pop-box-menu">
+    <div id="pop-up-menu-items" class="pop_up_menu_items"></div>
+  </div>
+</div>
+
 <div id="pop-up">
   <div id="pop-box">
     <div id="pop-close" onclick="pop.close()">x</div>
@@ -162,14 +177,12 @@
 </script>
 <script>
      $(document).ready(function(){
+
           var tx = db.transaction(['check_lists'],"readwrite");
           var store = tx.objectStore('check_lists');
           var cursor = store.openCursor(null, 'prev');
 
           cursor.onsuccess = function(e) {
-               function openMenu(x){
-                  x.classList.toggle("open");
-               };
                 var res = e.target.result;
                 if(res) {
                     $('#check_list_box').append(
