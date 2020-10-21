@@ -55,18 +55,23 @@
           var tx = db.transaction(['mkbT'],"readwrite");
           var store = tx.objectStore('mkbT');
           var cursor = store.openCursor();
+          let i = 0;
           cursor.onsuccess = function(e) {
                 var res = e.target.result;
-                if(res) {
+                if(res && i < 10) {
                     if(res.value.kod.toUpperCase().indexOf(txtValue.toUpperCase()) !== -1 ||
                        res.value.title.toUpperCase().indexOf(txtValue.toUpperCase()) !== -1){
+                            i++;
                             $('#searchRes').append ('<div  class = "container_child_mkb_item">'+
                                                        '<span class="container_child_mkb_item_kod">'+res.value.kod+'</span>'+
                                                        '<span class="container_child_mkb_item_title">'+res.value.title+'</span>'+
                                                     '</div>'
                                                     );
                         }
-                 res.continue();
+
+                            res.continue();
+
+
                 }
             }
          }else{
