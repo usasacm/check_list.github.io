@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Title</title>
+    <title>Список чек-листов</title>
     <script>document.write("<script type='text/javascript' src='/check_list.github.io/static/js/db.js?u=" + Date.now() + "'><\/script>");</script>
     <script>document.write("<script type='text/javascript' src='/check_list.github.io/static/js/jquery.js?u=" + Date.now() + "'><\/script>");</script>
     <script>document.write("<link rel='stylesheet' href='/check_list.github.io/static/css/style.css?u=" + Date.now() + "'>");</script>
@@ -12,7 +12,7 @@
     <script>document.write("<link rel='stylesheet' href='/check_list.github.io/static/css/popup_dynamic.css?u=" + Date.now() + "'>");</script>
     <script>document.write("<link rel='stylesheet' href='/check_list.github.io/static/css/popup_menu.css?u=" + Date.now() + "'>");</script>
     <script>document.write("<script type='text/javascript' src='/check_list.github.io/static/js/menu.js?u=" + Date.now() + "'><\/script>");</script>
-    <title>Список чек-листов</title>
+
 
 </head>
 <body>
@@ -69,7 +69,11 @@
                           if(isDialog){
                               list_items.push(res.value.value);
                           }else{
-                              list_items.push(res.value.title);
+                              if (res.value.hasOwnProperty("info")){
+                                 list_items.push({'info':res.value.title});
+                              }else{
+                                  list_items.push({'checkbox':res.value.title});
+                              }
                           }
                       }
                   res.continue();
@@ -100,10 +104,16 @@
                        var listQuestion = '';
                        list_items.forEach(function(item, idx){
                        console.log(idx);
-                           listQuestion+='<div class="item_question">'+
-                                             '<input class="item_question_checkbox" type="checkbox" value="" id="'+(idx+1)+'">' +
-                                             '<label class="item_question_label" for="'+(idx+1)+'">'+item+'</label>'+
-                                         '</div>';
+                           if(item.hasOwnProperty("info")){
+                               listQuestion+='<div class="item_question">'+
+                                                 '<label class="item_question_label_info"><b>'+item.info+'</b></label>'+
+                                             '</div>';
+                           }else{
+                               listQuestion+='<div class="item_question">'+
+                                                 '<input class="item_question_checkbox" type="checkbox" value="" id="'+(idx+1)+'">' +
+                                                 '<label class="item_question_label" for="'+(idx+1)+'">'+item.checkbox+'</label>'+
+                                             '</div>';
+                           }
                        });
                        pop.open(listQuestion);
                        console.log(listQuestion);

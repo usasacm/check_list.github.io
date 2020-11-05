@@ -52,5 +52,11 @@
     "title": "БОЛЕВОЙ СИНДРОМ ПРИ ЗНО",
     "table": "check_list_items",
     "dialog": false
+  },
+  {
+    "id": "item-event_covid",
+    "title": "Действия на вызове у пациентов с подозрением на <br> COVID-19",
+    "table": "check_list_items",
+    "dialog": false
   }
 ]

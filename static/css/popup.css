@@ -43,6 +43,11 @@
     color: white;
 }
 
+.item_question_label_info{
+   font-size: 17px;
+    color: #00ff10;
+}
+
 .item_question{
   border-radius: 5px;
   border: 1px solid #2699F2;
