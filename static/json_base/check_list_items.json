@@ -117,7 +117,6 @@
   {"parent_id": "item-event_covid", "id": 118, "title": "Собран эпидемиологический анамнез"},
   {"parent_id": "item-event_covid", "id": 119, "title": "Работа с больными с подтвержденными и подозрительными случаями на COVID-19"},
   {"parent_id": "item-event_covid", "id": 120, "title": "Лабораторно подтвержденный COVID-19"},
-  {"parent_id": "item-event_covid", "id": 121, "title": "Лабораторно подтвержденный COVID-19"},
   {"parent_id": "item-event_covid", "id": 122, "title": "В течении последних 2-недель:", "info": true},
   {"parent_id": "item-event_covid", "id": 123, "title": "вернулся из-за границы"},
   {"parent_id": "item-event_covid", "id": 124, "title": "был  контакт с вернувшимся из-за границы"},
